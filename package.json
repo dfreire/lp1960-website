@@ -1,0 +1,29 @@
+{
+  "name": "lp1960",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "tailwind-build": "tailwind build css/index.css -c ./tailwind.js -o src/index.css",
+    "start": "react-static start",
+    "stage": "react-static build --staging",
+    "build": "react-static build",
+    "serve": "serve dist -p 3000"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "dotenv": "^5.0.1",
+    "markdown-it": "^8.4.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-hot-loader": "^4.0.0-beta.21",
+    "react-router": "^4.2.0",
+    "react-static": "^5.8.5"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^4.0.3",
+    "eslint-config-react-tools": "1.x.x",
+    "serve": "^6.1.0",
+    "tailwindcss": "^0.5.2"
+  }
+}
