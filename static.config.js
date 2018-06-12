@@ -1,34 +1,53 @@
 const dotenv = require('dotenv')
-const axios = require('axios');
+const fs = require('fs');
 const path = require('path');
-import Document from'./src/Document';
+import Document from './src/Document';
 
 const config = dotenv.config().parsed;
+const { SITE_ROOT, DK_SERVER } = config;
+const CONTENT_DIR = path.join(process.cwd(), '..', 'lp1960-diskette-data', 'content');
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${config.DK_API_KEY}`;
+const root = require(path.join(CONTENT_DIR, 'index.json'));
+const introPage = require(path.join(CONTENT_DIR, '0-intro', 'index.json'));
+const imagesPage = require(path.join(CONTENT_DIR, '1-imagens-old', 'index.json'));
+const projectsPage = require(path.join(CONTENT_DIR, '2-projectos-old', 'index.json'));
+
+function listDirs(location) {
+	const dir = path.join(location);
+
+	const list = [];
+
+	fs.readdirSync(dir).forEach(subDir => {
+		fs.statSync(path.join(dir, subDir)).isDirectory() && list.push(subDir);
+	});
+
+	list.sort((a, b) => {
+		const a1 = parseInt(a.split('-')[0]);
+		const b1 = parseInt(b.split('-')[0]);
+		return a1 - b1;
+	});
+
+	return list;
+}
+
+const imageList = listDirs(path.join(CONTENT_DIR, '1-imagens-old')).map(dir => {
+	const image = require(path.join(CONTENT_DIR, '1-imagens-old', dir, 'index.json'));
+	image.baseUrl = `${DK_SERVER}/api/files/1-imagens-old/` + dir;
+	return image;
+});
+
+const projectList = listDirs(path.join(CONTENT_DIR, '2-projectos-old')).map(dir => {
+	const image = require(path.join(CONTENT_DIR, '2-projectos-old', dir, 'index.json'));
+	image.baseUrl = `${DK_SERVER}/api/files/2-projectos-old/` + dir;
+	return image;
+});
 
 export default {
-	siteRoot: config.SITE_ROOT,
+	siteRoot: SITE_ROOT,
 
 	Document,
 
 	getSiteData: async () => {
-		const {
-			data: root
-		} = await axios.get(`${config.DK_SERVER}/api/content`);
-
-		const {
-			data: introPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/0-intro`);
-
-		const {
-			data: imagesPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/1-imagens`);
-
-		const {
-			data: projectsPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/2-projectos`);
-
 		const links = [{
 				to: '/intro',
 				name: introPage.fields.title_pt,
@@ -49,46 +68,6 @@ export default {
 		}
 	},
 	getRoutes: async () => {
-		const {
-			data: introPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/0-intro`);
-
-		const {
-			data: imagesPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/1-imagens`);
-
-		const {
-			data: imageDirs
-		} = await axios.get(`${config.DK_SERVER}/api/dirs/1-imagens`);
-
-		const {
-			data: projectsPage
-		} = await axios.get(`${config.DK_SERVER}/api/content/2-projectos`);
-
-		const {
-			data: projectDirs
-		} = await axios.get(`${config.DK_SERVER}/api/dirs/2-projectos`);
-
-		const imageList = [];
-		for (let i = 0; i < imageDirs.length; i++) {
-			const dir = imageDirs[i];
-			const {
-				data: image
-			} = await axios.get(`${config.DK_SERVER}/api/content/1-imagens/` + dir);
-			image.baseUrl = `${config.DK_SERVER}/api/files/1-imagens/` + dir;
-			imageList.push(image);
-		}
-
-		const projectList = [];
-		for (let i = 0; i < projectDirs.length; i++) {
-			const dir = projectDirs[i];
-			const {
-				data: image
-			} = await axios.get(`${config.DK_SERVER}/api/content/2-projectos/` + dir);
-			image.baseUrl = `${config.DK_SERVER}/api/files/2-projectos/` + dir;
-			projectList.push(image);
-		}
-
 		return [{
 				path: '/',
 				component: 'src/pages/Home.jsx',
