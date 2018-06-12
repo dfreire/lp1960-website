@@ -3,12 +3,6 @@ import { Router, Link, withRouter, withSiteData } from 'react-static'
 import { hot } from 'react-hot-loader'
 import Routes from 'react-static-routes'
 
-// const links = [
-// 	{ to: '/intro', name: 'intro' },
-// 	{ to: '/imagens', name: 'imagens' },
-// 	{ to: '/projectos', name: 'projectos' },
-// ];
-
 const App = () => (
 	<Router>
 		<AppContent />
@@ -44,11 +38,13 @@ const AppContent = withRouter(withSiteData((props) => {
 				</div>
 			</div>
 
+			{/* 
 			<div className={classes.footerBlock}>
 				<div className={classes.footer}>
 					<a className={classes.footerLink} href="mailto:info@lp1960.com">info@lp1960.com</a>
 				</div>
 			</div>
+			*/}
 		</div>
 	);
 }));
