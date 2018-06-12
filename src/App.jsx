@@ -18,9 +18,11 @@ const AppContent = withRouter(withSiteData((props) => {
 			<div className={classes.headerBlock1}>
 				<div className={classes.headerBlock2}>
 					<div className={classes.header}>
+						{/*
 						<div className={classes.brandContainer}>
 							<Link className={classes.brand} to="/">{props.title}</Link>
 						</div>
+						*/}
 						<ul className={classes.nav}>
 							{links.map(link => (
 								<li key={link.name} className={classes.navItem}>
@@ -54,16 +56,16 @@ const classes = {
 
 	headerBlock1: "bg-grey-lightest pb-2",
 	headerBlock2: "bg-white shadow-md p-2",
-	header: "container mx-auto py-2 max-w-lg sm:flex",
+	header: "container mx-auto max-w-lg sm:flex",
 
 	brandContainer: "sm:flex-1 text-center sm:text-left",
 	brand: "text-black no-underline text-4xl font-black",
 
-	nav: "sm:flex-1 list-reset flex justify-center sm:justify-end mt-4",
-	navItem: "inline-block text-center ml-2",
+	nav: "sm:flex-1 list-reset flex justify-center sm:justify-end mt-1 mb-1",
+	navItem: "inline-block text-center ml-8",
 
-	navLink: "no-underline px-3 py-2 lowercase font-light text-grey-dark rounded border border-white hover:border-grey-light",
-	navLinkActive: "no-underline px-3 py-2 lowercase font-light text-grey-lightest bg-blue rounded",
+	navLink: "no-underline py-2 lowercase font text-grey",
+	navLinkActive: "no-underline py-2 lowercase font text-black",
 
 	contentBlock: "contentBlock py-2",
 	content: "container mx-auto max-w-lg",

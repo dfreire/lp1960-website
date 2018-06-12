@@ -11,6 +11,7 @@ const root = require(path.join(CONTENT_DIR, 'index.json'));
 const introPage = require(path.join(CONTENT_DIR, '0-intro', 'index.json'));
 const imagesPage = require(path.join(CONTENT_DIR, '4-imagens-old', 'index.json'));
 const projectsPage = require(path.join(CONTENT_DIR, '5-projectos-old', 'index.json'));
+const contactPage = require(path.join(CONTENT_DIR, '3-contacto', 'index.json'));
 
 function listDirs(location) {
 	const dir = path.join(location);
@@ -60,6 +61,10 @@ export default {
 				to: '/projectos1',
 				name: projectsPage.fields.title_pt,
 			},
+			{
+				to: '/contacto',
+				name: contactPage.fields.title_pt,
+			},
 		];
 
 		return {
@@ -75,7 +80,7 @@ export default {
 				path: '/intro',
 				component: 'src/pages/Intro.jsx',
 				getData: () => ({
-					text: introPage.fields.text,
+					text: introPage.fields.text_pt,
 				}),
 			},
 			{
@@ -121,8 +126,13 @@ export default {
 						src: `${item.baseUrl}/${item.fields.image}`,
 					})
 				})),
-			},
-			{
+			}, {
+				path: '/contacto',
+				component: 'src/pages/Contacto.jsx',
+				getData: () => ({
+					text: contactPage.fields.text_pt,
+				}),
+			}, {
 				is404: true,
 				component: 'src/pages/404.jsx',
 			},
