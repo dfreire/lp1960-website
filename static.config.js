@@ -90,7 +90,7 @@ export default {
 					const images = imageList
 						.filter(item => item.fields.image != null)
 						.map((item, i) => ({
-							href: `/imagens/${i}`,
+							href: `/imagens1/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
 						}));
 					return {
@@ -112,7 +112,7 @@ export default {
 					const images = projectList
 						.filter(item => item.fields.image != null)
 						.map((item, i) => ({
-							href: `/projectos/${i}`,
+							href: `/projectos1/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
 						}));
 					return {
