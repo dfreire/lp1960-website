@@ -39,14 +39,6 @@ const AppContent = withRouter(withSiteData((props) => {
 					<Routes />
 				</div>
 			</div>
-
-			{/* 
-			<div className={classes.footerBlock}>
-				<div className={classes.footer}>
-					<a className={classes.footerLink} href="mailto:info@lp1960.com">info@lp1960.com</a>
-				</div>
-			</div>
-			*/}
 		</div>
 	);
 }));
@@ -69,10 +61,6 @@ const classes = {
 
 	contentBlock: "contentBlock py-2",
 	content: "container mx-auto max-w-lg",
-
-	footerBlock: "footerBlock bg-grey-darkest w-full py-4",
-	footer: "container mx-auto px-2 max-w-lg text-center",
-	footerLink: "no-underline text-grey-light text-sm hover:text-white",
 };
 
 export default hot(module)(App)

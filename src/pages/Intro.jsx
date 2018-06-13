@@ -10,5 +10,5 @@ export default withSiteData(withRouteData((props) => (
 )))
 
 const classes = {
-	containter: "p-2 text-justify font-thin",
+	containter: "py-2 text-justify font-thin",
 }

@@ -9,8 +9,8 @@ const CONTENT_DIR = path.join(process.cwd(), '..', 'lp1960-diskette-data', 'cont
 
 const root = require(path.join(CONTENT_DIR, 'index.json'));
 const introPage = require(path.join(CONTENT_DIR, '0-intro', 'index.json'));
-const imagesPage = require(path.join(CONTENT_DIR, '4-imagens-old', 'index.json'));
-const projectsPage = require(path.join(CONTENT_DIR, '5-projectos-old', 'index.json'));
+const imagesPage = require(path.join(CONTENT_DIR, '1-imagens', 'index.json'));
+const projectsPage = require(path.join(CONTENT_DIR, '2-projectos', 'index.json'));
 const contactPage = require(path.join(CONTENT_DIR, '3-contacto', 'index.json'));
 
 function listDirs(location) {
@@ -54,11 +54,11 @@ export default {
 				name: introPage.fields.title_pt,
 			},
 			{
-				to: '/imagens1',
+				to: '/imagens',
 				name: imagesPage.fields.title_pt,
 			},
 			{
-				to: '/projectos1',
+				to: '/projectos',
 				name: projectsPage.fields.title_pt,
 			},
 			{
@@ -84,13 +84,13 @@ export default {
 				}),
 			},
 			{
-				path: '/imagens1',
-				component: 'src/pages/ImageList1.jsx',
+				path: '/imagens',
+				component: 'src/pages/Images.jsx',
 				getData: () => {
 					const images = imageList
 						.filter(item => item.fields.image != null)
 						.map((item, i) => ({
-							href: `/imagens1/${i}`,
+							href: `/imagens/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
 						}));
 					return {
@@ -106,13 +106,13 @@ export default {
 				})),
 			},
 			{
-				path: '/projectos1',
-				component: 'src/pages/ImageList1.jsx',
+				path: '/projectos',
+				component: 'src/pages/Images.jsx',
 				getData: () => {
 					const images = projectList
 						.filter(item => item.fields.image != null)
 						.map((item, i) => ({
-							href: `/projectos1/${i}`,
+							href: `/projectos/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
 						}));
 					return {
