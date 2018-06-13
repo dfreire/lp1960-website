@@ -1,28 +1,30 @@
 import React from 'react'
 import { withSiteData, withRouteData } from 'react-static'
 
-const INTERVAL = 3000;
+const INTERVAL = 5000;
 
 class Images extends React.Component {
     intervalRef = undefined;
 
     state = {
         visibleIndex: 0,
-        imageClassName: '',
+        fadeClassName: '',
         lastChangeTimestamp: 0,
     };
 
     render() {
         const { images } = this.props;
-        const { visibleIndex, imageClassName } = this.state;
+        const { visibleIndex, fadeClassName } = this.state;
         const image = images[visibleIndex];
         const height = window.innerHeight - 200;
 
         return (
-            <div className={classes.container} >
-                <div className={classes.imageContainer}>
-                    <img className={imageClassName} src={image.src + `?w=800&h=${height}`} alt="" onClick={this.nextImage} />
-                    <p>Blah</p>
+            <div className={classes.container}>
+                <div className={fadeClassName} >
+                    <div className={classes.imageContainer}>
+                        <img src={image.src + `?w=800&h=${height}`} alt="" onClick={this.nextImage} />
+                        <p>{image.legend}</p>
+                    </div>
                 </div>
             </div>
         );
@@ -59,11 +61,11 @@ class Images extends React.Component {
     }
 
     setVisibleIndex = (visibleIndex) => {
-        this.setState({ imageClassName: 'fadeOut' });
+        this.setState({ fadeClassName: 'fadeOut' });
         setTimeout(() => {
             this.setState({
                 visibleIndex,
-                imageClassName: 'opacity-0 fadeIn', // opacity will increase to 1
+                fadeClassName: 'opacity-0 fadeIn', // opacity will increase to 1
                 lastChangeTimestamp: Date.now(),
             });
         }, 1000);

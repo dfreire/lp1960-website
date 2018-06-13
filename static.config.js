@@ -4,7 +4,10 @@ const path = require('path');
 import Document from './src/Document';
 
 const config = dotenv.config().parsed;
-const { SITE_ROOT, DK_SERVER } = config;
+const {
+	SITE_ROOT,
+	DK_SERVER
+} = config;
 const CONTENT_DIR = path.join(process.cwd(), '..', 'lp1960-diskette-data', 'content');
 
 const root = require(path.join(CONTENT_DIR, 'index.json'));
@@ -114,6 +117,7 @@ export default {
 						.map((item, i) => ({
 							href: `/projectos/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
+							legend: item.fields.title_pt,
 						}));
 					return {
 						images,
