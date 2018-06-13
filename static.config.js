@@ -54,25 +54,25 @@ export default {
 	getSiteData: async () => {
 		const links = [{
 				to: '/intro',
-				name: introPage.fields.title_pt,
+				name: introPage.fields.title,
 			},
 			{
 				to: '/imagens',
-				name: imagesPage.fields.title_pt,
+				name: imagesPage.fields.title,
 			},
 			{
 				to: '/projectos',
-				name: projectsPage.fields.title_pt,
+				name: projectsPage.fields.title,
 			},
 			{
 				to: '/contacto',
-				name: contactPage.fields.title_pt,
+				name: contactPage.fields.title,
 			},
 		];
 
 		return {
 			links,
-			title: root.fields.title_pt,
+			title: root.fields.title,
 		}
 	},
 	getRoutes: async () => {
@@ -83,7 +83,7 @@ export default {
 				path: '/intro',
 				component: 'src/pages/Intro.jsx',
 				getData: () => ({
-					text: introPage.fields.text_pt,
+					...introPage.fields,
 				}),
 			},
 			{
@@ -117,7 +117,7 @@ export default {
 						.map((item, i) => ({
 							href: `/projectos/${i}`,
 							src: `${item.baseUrl}/${item.fields.image}`,
-							legend: item.fields.title_pt,
+							legend: item.fields.title,
 						}));
 					return {
 						images,
@@ -134,7 +134,7 @@ export default {
 				path: '/contacto',
 				component: 'src/pages/Contacto.jsx',
 				getData: () => ({
-					text: contactPage.fields.text_pt,
+					...contactPage.fields,
 				}),
 			}, {
 				is404: true,

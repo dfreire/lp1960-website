@@ -17,12 +17,13 @@ class Images extends React.Component {
         const { visibleIndex, fadeClassName } = this.state;
         const image = images[visibleIndex];
         const height = window.innerHeight - 200;
+        const imageCursor = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
 
         return (
             <div className={classes.container}>
                 <div className={fadeClassName} >
                     <div className={classes.imageContainer}>
-                        <img src={image.src + `?w=800&h=${height}`} alt="" onClick={this.nextImage} />
+                        <img className={imageCursor} src={image.src + `?w=800&h=${height}`} alt="" onClick={this.nextImage} />
                         <p>{image.legend}</p>
                     </div>
                 </div>
@@ -50,14 +51,18 @@ class Images extends React.Component {
 
     nextImage = () => {
         const { images } = this.props;
-        const { visibleIndex } = this.state;
-        this.setVisibleIndex(visibleIndex < images.length - 1 ? visibleIndex + 1 : 0);
+        if (images.length > 1) {
+            const { visibleIndex } = this.state;
+            this.setVisibleIndex(visibleIndex < images.length - 1 ? visibleIndex + 1 : 0);
+        }
     }
 
     prevImage = () => {
         const { images } = this.props;
-        const { visibleIndex } = this.state;
-        this.setVisibleIndex(visibleIndex > 0 ? visibleIndex - 1 : images.length - 1);
+        if (images.length > 1) {
+            const { visibleIndex } = this.state;
+            this.setVisibleIndex(visibleIndex > 0 ? visibleIndex - 1 : images.length - 1);
+        }
     }
 
     setVisibleIndex = (visibleIndex) => {
