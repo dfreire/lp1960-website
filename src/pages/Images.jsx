@@ -17,7 +17,7 @@ class Images extends React.Component {
         const { visibleIndex, fadeClassName } = this.state;
         const image = images[visibleIndex];
         const imageCursor = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
-        const height = typeof document !== 'undefined' ? window.innerHeight - 200 : 400;
+        const height = typeof document !== 'undefined' ? window.innerHeight - 200 : 700;
 
         return (
             <div className={classes.container}>
