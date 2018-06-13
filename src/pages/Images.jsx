@@ -7,6 +7,7 @@ class Images extends React.Component {
     intervalRef = undefined;
 
     state = {
+        imgHeight: 700,
         visibleIndex: 0,
         fadeClassName: '',
         lastChangeTimestamp: 0,
@@ -14,21 +15,25 @@ class Images extends React.Component {
 
     render() {
         const { images } = this.props;
-        const { visibleIndex, fadeClassName } = this.state;
+        const { imgHeight, visibleIndex, fadeClassName } = this.state;
         const image = images[visibleIndex];
         const imageCursor = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
-        const height = typeof document !== 'undefined' ? window.innerHeight - 200 : 700;
 
         return (
             <div className={classes.container}>
                 <div className={fadeClassName} >
                     <div className={classes.imageContainer}>
-                        <img className={imageCursor} src={image.src + `?w=800&h=${height}`} alt="" onClick={this.nextImage} />
+                        <img className={imageCursor} src={image.src + `?w=800&h=${imgHeight}`} alt="" onClick={this.nextImage} />
                         <p>{image.legend}</p>
                     </div>
                 </div>
             </div>
         );
+    }
+
+    componentWillMount() {
+        const imgHeight = typeof document !== 'undefined' ? window.innerHeight - 200 : 700;
+        this.setState({ imgHeight });
     }
 
     componentDidMount() {
