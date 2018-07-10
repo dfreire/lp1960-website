@@ -1,14 +1,16 @@
-import React from 'react'
-import { withSiteData, withRouteData } from 'react-static'
+import React from 'react';
+import { withSiteData, withRouteData } from 'react-static';
 const md = require('markdown-it')('commonmark');
 
-export default withSiteData(withRouteData((props) => (
-	<div
-		className={classes.containter}
-		dangerouslySetInnerHTML={{ __html: md.render(props.text) }}
-	/>
-)))
+export default withSiteData(
+	withRouteData(props => (
+		<div className={classes.container}>
+			<div className={classes.content} dangerouslySetInnerHTML={{ __html: md.render(props.text) }} />
+		</div>
+	))
+);
 
 const classes = {
-	containter: "py-2 text-justify font-thin",
-}
+	container: 'max-w-sm mx-2 py-8 float-right',
+	content: 'text-justify font-thin leading-normal',
+};

@@ -1,13 +1,10 @@
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 import Document from './src/Document';
 
 const config = dotenv.config().parsed;
-const {
-	SITE_ROOT,
-	DK_SERVER
-} = config;
+const { SITE_ROOT, DK_SERVER } = config;
 const CONTENT_DIR = path.join(process.cwd(), '..', 'lp1960-diskette-data', 'content');
 
 const root = require(path.join(CONTENT_DIR, 'index.json'));
@@ -52,7 +49,8 @@ export default {
 	Document,
 
 	getSiteData: async () => {
-		const links = [{
+		const links = [
+			{
 				to: '/intro',
 				name: introPage.fields.title,
 			},
@@ -73,13 +71,15 @@ export default {
 		return {
 			links,
 			title: root.fields.title,
-		}
+		};
 	},
 	getRoutes: async () => {
-		return [{
+		return [
+			{
 				path: '/',
 				component: 'src/pages/Home.jsx',
-			}, {
+			},
+			{
 				path: '/intro',
 				component: 'src/pages/Intro.jsx',
 				getData: () => ({
@@ -90,56 +90,54 @@ export default {
 				path: '/imagens',
 				component: 'src/pages/Images.jsx',
 				getData: () => {
-					const images = imageList
-						.filter(item => item.fields.image != null)
-						.map((item, i) => ({
-							href: `/imagens/${i}`,
-							src: `${item.baseUrl}/${item.fields.image}`,
-						}));
+					const images = imageList.filter(item => item.fields.image != null).map((item, i) => ({
+						href: `/imagens/${i}`,
+						src: `${item.baseUrl}/${item.fields.image}`,
+					}));
 					return {
 						images,
-					}
+					};
 				},
 				children: imageList.map((item, i) => ({
 					path: `/${i}`,
-					component: 'src/pages/Image1.jsx',
+					component: 'src/pages/Image.jsx',
 					getData: () => ({
 						src: `${item.baseUrl}/${item.fields.image}`,
-					})
+					}),
 				})),
 			},
 			{
 				path: '/projectos',
 				component: 'src/pages/Images.jsx',
 				getData: () => {
-					const images = projectList
-						.filter(item => item.fields.image != null)
-						.map((item, i) => ({
-							href: `/projectos/${i}`,
-							src: `${item.baseUrl}/${item.fields.image}`,
-							legend: item.fields.title,
-						}));
+					const images = projectList.filter(item => item.fields.image != null).map((item, i) => ({
+						href: `/projectos/${i}`,
+						src: `${item.baseUrl}/${item.fields.image}`,
+						legend: item.fields.title,
+					}));
 					return {
 						images,
-					}
+					};
 				},
 				children: projectList.map((item, i) => ({
 					path: `/${i}`,
-					component: 'src/pages/Image1.jsx',
+					component: 'src/pages/Image.jsx',
 					getData: () => ({
 						src: `${item.baseUrl}/${item.fields.image}`,
-					})
+					}),
 				})),
-			}, {
+			},
+			{
 				path: '/contacto',
 				component: 'src/pages/Contacto.jsx',
 				getData: () => ({
 					...contactPage.fields,
 				}),
-			}, {
+			},
+			{
 				is404: true,
 				component: 'src/pages/404.jsx',
 			},
-		]
+		];
 	},
-}
+};

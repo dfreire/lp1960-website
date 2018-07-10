@@ -4994,6 +4994,10 @@ p {
   transition: opacity 2.5s 0s;
 }
 
+.w_400 {
+  width: 400px;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

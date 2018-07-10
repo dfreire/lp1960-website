@@ -1,6 +1,4 @@
-import React from 'react'
-import { Redirect } from 'react-static'
+import React from 'react';
+import { Redirect } from 'react-static';
 
-export default (props) => (
-	<Redirect to="/intro" />
-)
+export default props => <Redirect to="/intro" />;

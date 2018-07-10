@@ -5,48 +5,51 @@
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* Background color of the footer */
-    background-color: #3d4852;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	/* Background color of the footer */
+	background-color: #3d4852;
 }
 
 #root {
-    min-height: 100%;
-    position: relative;
-    /* Background color of the content */
-    background-color: #f8fafc;
-    /* Height of the footer */
-    padding-bottom: 60px;
+	min-height: 100%;
+	position: relative;
+	/* Background color of the content */
+	background-color: #f8fafc;
+	/* Height of the footer */
+	padding-bottom: 60px;
 }
 
 .contentBlock {
-    /* Background color of the content */
-    background-color: #f8fafc;
+	/* Background color of the content */
+	background-color: #f8fafc;
 }
 
 .footerBlock {
-    position: absolute;
-    bottom: 0;
-    /* Height of the footer */
-    height: 60px;
-    /* Background color of the footer */
-    background-color: #3d4852;
+	position: absolute;
+	bottom: 0;
+	/* Height of the footer */
+	height: 60px;
+	/* Background color of the footer */
+	background-color: #3d4852;
 }
 
 p {
-    padding-top: .5rem;
-    padding-bottom: 0.75rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.75rem;
 }
 
 .fadeOut {
-    opacity: 0;
-    transition: opacity 1s 0s;
+	opacity: 0;
+	transition: opacity 1s 0s;
 }
 
 .fadeIn {
-    opacity: 1;
-    transition: opacity 2.5s 0s;
+	opacity: 1;
+	transition: opacity 2.5s 0s;
 }
 
+.w_400 {
+	width: 400px;
+}

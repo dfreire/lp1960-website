@@ -1,14 +1,14 @@
-import React from 'react'
+import React from 'react';
 
 const Document = ({ Html, Head, Body, children, siteData, renderMeta }) => (
-    <Html lang="en-US">
-        <Head>
-            <meta charSet="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>{siteData.title}</title>
-        </Head>
-        <Body>{children}</Body>
-    </Html>
+	<Html lang="en-US">
+		<Head>
+			<meta charSet="UTF-8" />
+			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<title>{siteData.title}</title>
+		</Head>
+		<Body>{children}</Body>
+	</Html>
 );
 
 export default Document;
