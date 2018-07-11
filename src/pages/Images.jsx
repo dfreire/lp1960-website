@@ -2,7 +2,6 @@ import React from 'react';
 import { withSiteData, withRouteData } from 'react-static';
 
 const INTERVAL = 5000;
-
 const MARGIN_Y = 70;
 
 class Images extends React.Component {
@@ -21,13 +20,19 @@ class Images extends React.Component {
 		const { images } = this.props;
 		const { marginTop, imgHeight, imgWidth, visibleIndex, fadeClassName } = this.state;
 		const image = images[visibleIndex];
-		const imageCursor = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
+		const imageClassName = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
 
 		return (
 			<div className={classes.container} style={{ marginTop, height: imgHeight + MARGIN_Y }}>
 				<div className={fadeClassName}>
 					<div className={classes.imageContainer}>
-						<img className={imageCursor} src={image.src + `?w=${imgWidth}&h=${imgHeight}`} alt="" onClick={this.nextImage} />
+						<img
+							className={imageClassName}
+							style={{ maxWidth: imgWidth, maxHeight: imgHeight }}
+							src={image.src + `?w=${800}&h=${800}`}
+							alt={image.legend}
+							onClick={this.nextImage}
+						/>
 						<p>{image.legend}</p>
 					</div>
 				</div>
