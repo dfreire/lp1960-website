@@ -19,8 +19,10 @@ class Images extends React.Component {
 	render() {
 		const { images } = this.props;
 		const { marginTop, imgHeight, imgWidth, visibleIndex, fadeClassName } = this.state;
-		const image = images[visibleIndex];
 		const imageClassName = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
+		const image = images[visibleIndex];
+		const nextImage = images[this.nextIndex()];
+		const prevImage = images[this.prevIndex()];
 
 		return (
 			<div className={classes.container} style={{ marginTop, height: imgHeight + MARGIN_Y }}>
@@ -35,6 +37,8 @@ class Images extends React.Component {
 						/>
 						<p>{image.legend}</p>
 					</div>
+					<img style={{ display: 'none' }} src={nextImage.src + `?w=${800}&h=${800}`} alt="" />
+					<img style={{ display: 'none' }} src={prevImage.src + `?w=${800}&h=${800}`} alt="" />
 				</div>
 			</div>
 		);
@@ -74,19 +78,29 @@ class Images extends React.Component {
 		}, INTERVAL);
 	};
 
+	nextIndex = () => {
+		const { images } = this.props;
+		const { visibleIndex } = this.state;
+		return visibleIndex < images.length - 1 ? visibleIndex + 1 : 0;
+	};
+
 	nextImage = () => {
 		const { images } = this.props;
 		if (images.length > 1) {
-			const { visibleIndex } = this.state;
-			this.setVisibleIndex(visibleIndex < images.length - 1 ? visibleIndex + 1 : 0);
+			this.setVisibleIndex(this.nextIndex());
 		}
+	};
+
+	prevIndex = () => {
+		const { images } = this.props;
+		const { visibleIndex } = this.state;
+		return visibleIndex > 0 ? visibleIndex - 1 : images.length - 1;
 	};
 
 	prevImage = () => {
 		const { images } = this.props;
 		if (images.length > 1) {
-			const { visibleIndex } = this.state;
-			this.setVisibleIndex(visibleIndex > 0 ? visibleIndex - 1 : images.length - 1);
+			this.setVisibleIndex(this.prevIndex());
 		}
 	};
 

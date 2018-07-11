@@ -95,11 +95,11 @@ export default {
 						href: `/imagens/${i}`,
 						src: `${item.baseUrl}/${item.fields.image}`,
 					}));
-					for (let image of images) {
-						console.log(`${image.src}?w=800&h=800`);
-						await axios.get(`${image.src}?w=800&h=800`);
-					}
-					console.log('imagens done');
+					// for (let image of images) {
+					// 	console.log(`${image.src}?w=800&h=800`);
+					// 	await axios.get(`${image.src}?w=800&h=800`);
+					// }
+					// console.log('imagens done');
 					return {
 						images,
 					};
@@ -114,11 +114,11 @@ export default {
 						src: `${item.baseUrl}/${item.fields.image}`,
 						legend: item.fields.title,
 					}));
-					for (let image of images) {
-						console.log(`${image.src}?w=800&h=800`);
-						await axios.get(`${image.src}?w=800&h=800`);
-					}
-					console.log('projectos done');
+					// for (let image of images) {
+					// 	console.log(`${image.src}?w=800&h=800`);
+					// 	await axios.get(`${image.src}?w=800&h=800`);
+					// }
+					// console.log('projectos done');
 					return {
 						images,
 					};
