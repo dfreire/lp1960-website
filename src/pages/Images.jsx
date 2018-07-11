@@ -37,14 +37,14 @@ class Images extends React.Component {
 						/>
 						<p>{image.legend}</p>
 					</div>
-					<img style={{ display: 'none' }} src={nextImage.src + `?w=${800}&h=${800}`} alt="" />
-					<img style={{ display: 'none' }} src={prevImage.src + `?w=${800}&h=${800}`} alt="" />
 				</div>
+				<img style={{ display: 'none' }} src={nextImage.src + `?w=${800}&h=${800}`} alt="" />
+				<img style={{ display: 'none' }} src={prevImage.src + `?w=${800}&h=${800}`} alt="" />
 			</div>
 		);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		if (typeof document !== 'undefined') {
 			const maxHeight = window.innerHeight - MARGIN_Y - MARGIN_Y;
 			const imgHeight = Math.min(maxHeight, 800);
@@ -58,9 +58,7 @@ class Images extends React.Component {
 			// console.log('imgWidth', imgWidth);
 			this.setState({ marginTop, imgHeight, imgWidth });
 		}
-	}
 
-	componentDidMount() {
 		clearInterval(this.intervalRef);
 		this.autoNextImage();
 	}
