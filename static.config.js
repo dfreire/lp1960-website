@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const path = require('path');
 import Document from './src/Document';
+import axios from 'axios';
 
 const config = dotenv.config().parsed;
 const { SITE_ROOT, DK_SERVER } = config;
@@ -89,43 +90,39 @@ export default {
 			{
 				path: '/imagens',
 				component: 'src/pages/Images.jsx',
-				getData: () => {
+				getData: async () => {
 					const images = imageList.filter(item => item.fields.image != null).map((item, i) => ({
 						href: `/imagens/${i}`,
 						src: `${item.baseUrl}/${item.fields.image}`,
 					}));
+					for (let image of images) {
+						console.log(`${image.src}?w=800&h=800`);
+						await axios.get(`${image.src}?w=800&h=800`);
+					}
+					console.log('imagens done');
 					return {
 						images,
 					};
 				},
-				children: imageList.map((item, i) => ({
-					path: `/${i}`,
-					component: 'src/pages/Image.jsx',
-					getData: () => ({
-						src: `${item.baseUrl}/${item.fields.image}`,
-					}),
-				})),
 			},
 			{
 				path: '/projectos',
 				component: 'src/pages/Images.jsx',
-				getData: () => {
+				getData: async () => {
 					const images = projectList.filter(item => item.fields.image != null).map((item, i) => ({
 						href: `/projectos/${i}`,
 						src: `${item.baseUrl}/${item.fields.image}`,
 						legend: item.fields.title,
 					}));
+					for (let image of images) {
+						console.log(`${image.src}?w=800&h=800`);
+						await axios.get(`${image.src}?w=800&h=800`);
+					}
+					console.log('projectos done');
 					return {
 						images,
 					};
 				},
-				children: projectList.map((item, i) => ({
-					path: `/${i}`,
-					component: 'src/pages/Image.jsx',
-					getData: () => ({
-						src: `${item.baseUrl}/${item.fields.image}`,
-					}),
-				})),
 			},
 			{
 				path: '/contacto',

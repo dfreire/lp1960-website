@@ -3,11 +3,15 @@ import { withSiteData, withRouteData } from 'react-static';
 
 const INTERVAL = 5000;
 
+const MARGIN_Y = 70;
+
 class Images extends React.Component {
 	intervalRef = undefined;
 
 	state = {
-		imgHeight: 700,
+		marginTop: 0,
+		imgWidth: 0,
+		imgHeight: 0,
 		visibleIndex: 0,
 		fadeClassName: '',
 		lastChangeTimestamp: 0,
@@ -15,15 +19,15 @@ class Images extends React.Component {
 
 	render() {
 		const { images } = this.props;
-		const { imgHeight, visibleIndex, fadeClassName } = this.state;
+		const { marginTop, imgHeight, imgWidth, visibleIndex, fadeClassName } = this.state;
 		const image = images[visibleIndex];
 		const imageCursor = images.length > 1 ? 'cursor-pointer' : 'cursor-auto';
 
 		return (
-			<div className={classes.container}>
+			<div className={classes.container} style={{ marginTop, height: imgHeight + MARGIN_Y }}>
 				<div className={fadeClassName}>
 					<div className={classes.imageContainer}>
-						<img className={imageCursor} src={image.src + `?w=800&h=${imgHeight}`} alt="" onClick={this.nextImage} />
+						<img className={imageCursor} src={image.src + `?w=${imgWidth}&h=${imgHeight}`} alt="" onClick={this.nextImage} />
 						<p>{image.legend}</p>
 					</div>
 				</div>
@@ -32,8 +36,19 @@ class Images extends React.Component {
 	}
 
 	componentWillMount() {
-		const imgHeight = typeof document !== 'undefined' ? window.innerHeight - 200 : 700;
-		this.setState({ imgHeight });
+		if (typeof document !== 'undefined') {
+			const maxHeight = window.innerHeight - MARGIN_Y - MARGIN_Y;
+			const imgHeight = Math.min(maxHeight, 800);
+			const marginTop = Math.floor((maxHeight - imgHeight) / 2);
+			const maxWidth = window.innerWidth;
+			const imgWidth = Math.min(maxWidth, 800);
+			// console.log('winHeight', window.innerHeight);
+			// console.log('maxHeight', maxHeight);
+			// console.log('marginTop', marginTop);
+			// console.log('imgHeight', imgHeight);
+			// console.log('imgWidth', imgWidth);
+			this.setState({ marginTop, imgHeight, imgWidth });
+		}
 	}
 
 	componentDidMount() {
@@ -85,6 +100,6 @@ class Images extends React.Component {
 export default withSiteData(withRouteData(Images));
 
 const classes = {
-	container: 'mb-4 py-4 text-right',
-	imageContainer: 'inline-block text-center text-sm font-light',
+	container: 'mx-2 flex justify-end items-center',
+	imageContainer: 'text-center text-sm font-light',
 };
