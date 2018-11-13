@@ -1,7 +1,8 @@
 import React from 'react';
 import { withSiteData, withRouteData } from 'react-static';
 
-const INTERVAL = 5000;
+// const INTERVAL = 5000;
+const INTERVAL = 2500;
 const MARGIN_Y = 70;
 
 class Images extends React.Component {

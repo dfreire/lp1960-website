@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Document = ({ Html, Head, Body, children, siteData, renderMeta }) => (
-	<Html lang="en-US">
+	<Html lang="pt">
 		<Head>
 			<meta charSet="UTF-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />

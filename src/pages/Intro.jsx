@@ -5,7 +5,7 @@ const md = require('markdown-it')('commonmark');
 export default withSiteData(
 	withRouteData(props => (
 		<div className={classes.container}>
-			<div className={classes.content} dangerouslySetInnerHTML={{ __html: md.render(props.text) }} />
+			<div className={classes.content} style={{ hyphens: 'auto', width: 472 }} dangerouslySetInnerHTML={{ __html: md.render(props.text) }} />
 		</div>
 	))
 );
